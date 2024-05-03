@@ -2,7 +2,6 @@ package gameoflife
 
 import (
 	"image/color"
-	"math/rand"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/vector"
@@ -25,9 +24,14 @@ type Grid struct {
 	tiles []*Tile
 }
 
-func NewGrid() *Grid {
+func NewGrid(starting_positions [][]int) *Grid {
 	var tiles []*Tile
-	tiles = append(tiles, &Tile{5, 5})
+	centering_adjustment := (NUM_LINES / 2) - 1
+	for _, position := range starting_positions {
+		x := position[0] + centering_adjustment
+		y := position[1] + centering_adjustment
+		tiles = append(tiles, &Tile{x, y})
+	}
 	grid := &Grid{
 		tiles: tiles,
 	}
@@ -76,15 +80,8 @@ func DrawGridLines(width int, height int, gridImage *ebiten.Image) {
 	}
 }
 
-func (g *Grid) Update() error {
-	g.tiles = append(g.tiles, &Tile{
-		rand.Intn(NUM_LINES + 1), rand.Intn(NUM_LINES + 1),
-	})
-	return nil
-}
-
 func getXYCoordFromGridRef(x_coord int, y_coord int) (float32, float32) {
-	// where we have a grid (x_coord=0, y_coord=0) -> (x_coord=N, y_coord=N)
+	// where we have a grid (x_coord=0, y_coord=0) -> (x_coord=N-1, y_coord=N-1)
 	x := LINE_WIDTH + x_coord*(BOX_SIDE_LEN+LINE_WIDTH)
 	y := LINE_WIDTH + y_coord*(BOX_SIDE_LEN+LINE_WIDTH)
 	return float32(x), float32(y)

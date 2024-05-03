@@ -7,10 +7,10 @@ import (
 )
 
 func main() {
-	game := gameoflife.NewGame()
+	game := gameoflife.NewGame(gameoflife.BLINKER, gameoflife.ConwaysGameOfLife)
 	ebiten.SetWindowSize(gameoflife.WIDTH, gameoflife.HEIGHT)
 	ebiten.SetWindowTitle("Game Of Life Simulator")
-	ebiten.SetTPS(1) // num ticks per second
+	ebiten.SetTPS(5) // num ticks per second
 	if err := ebiten.RunGame(game); err != nil {
 		panic(err)
 	}
