@@ -4,8 +4,9 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-const WIDTH = 410
-const HEIGHT = 410
+const ADJ = 2
+const WIDTH = 500 + ADJ
+const HEIGHT = 500 + ADJ
 
 type Game struct {
 	grid *Grid

@@ -1,7 +1,6 @@
 package gameoflife
 
 import (
-	"fmt"
 	"image/color"
 	"math/rand"
 
@@ -9,10 +8,10 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/vector"
 )
 
-const LINE_WIDTH = 10
+const LINE_WIDTH = ADJ
 const WIDTH_adj = WIDTH - LINE_WIDTH
 const HEIGHT_adj = HEIGHT - LINE_WIDTH
-const NUM_LINES = 10
+const NUM_LINES = 20
 const BOX_SIDE_LEN = WIDTH_adj/NUM_LINES - LINE_WIDTH
 
 var COLOR_RED = color.RGBA{255, 0, 0, 1}
@@ -44,13 +43,11 @@ func (g *Grid) Draw(gridImage *ebiten.Image) {
 
 func DrawTile(x, y int, gridImage *ebiten.Image) {
 	x_coord, y_coord := getXYCoordFromGridRef(x, y)
-	fmt.Println(x_coord, x, "|", y_coord, y)
 	vector.DrawFilledRect(gridImage, x_coord, y_coord, BOX_SIDE_LEN, BOX_SIDE_LEN, COLOR_RED, false)
 }
 
 func DrawGridLines(width int, height int, gridImage *ebiten.Image) {
 	var N float32 = float32(NUM_LINES)
-	var line_width float32 = 10.0
 	// vertical
 	var i float32 = 0
 	for i <= N {
@@ -58,8 +55,8 @@ func DrawGridLines(width int, height int, gridImage *ebiten.Image) {
 			gridImage,
 			i*(float32(width)/N),
 			0,
-			line_width,
-			float32(height)+line_width,
+			LINE_WIDTH,
+			float32(height)+LINE_WIDTH,
 			color.White,
 			false)
 		i++
@@ -71,8 +68,8 @@ func DrawGridLines(width int, height int, gridImage *ebiten.Image) {
 			gridImage,
 			0,
 			i*(float32(height)/N),
-			float32(width)+line_width,
-			line_width,
+			float32(width)+LINE_WIDTH,
+			LINE_WIDTH,
 			color.White,
 			false)
 		i++
