@@ -2,11 +2,10 @@ package gameoflife
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
-const WIDTH = 400
-const HEIGHT = 400
+const WIDTH = 410
+const HEIGHT = 410
 
 type Game struct {
 	grid *Grid
@@ -18,7 +17,6 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	ebitenutil.DebugPrint(screen, "GAME OF LIFE!")
 	g.grid.Draw(screen)
 }
 
