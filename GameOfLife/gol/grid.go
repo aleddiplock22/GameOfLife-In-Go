@@ -10,7 +10,7 @@ import (
 const LINE_WIDTH = ADJ
 const WIDTH_adj = WIDTH - LINE_WIDTH
 const HEIGHT_adj = HEIGHT - LINE_WIDTH
-const NUM_LINES = 20
+const NUM_LINES = 50 // use 50 for Gosper Glider Gun
 const BOX_SIDE_LEN = WIDTH_adj/NUM_LINES - LINE_WIDTH
 
 var COLOR_RED = color.RGBA{255, 0, 0, 1}
@@ -26,7 +26,7 @@ type Grid struct {
 
 func NewGrid(starting_positions [][]int) *Grid {
 	var tiles []*Tile
-	centering_adjustment := (NUM_LINES / 2) - 1
+	centering_adjustment := (NUM_LINES / 2) - int(NUM_LINES/10)
 	for _, position := range starting_positions {
 		x := position[0] + centering_adjustment
 		y := position[1] + centering_adjustment

@@ -1,14 +1,12 @@
 package gameoflife
 
 import (
-	"fmt"
-
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
 const ADJ = 2
-const WIDTH = 500 + ADJ
-const HEIGHT = 500 + ADJ
+const WIDTH = 1000 + ADJ
+const HEIGHT = 1000 + ADJ
 
 type Game struct {
 	grid  *Grid
@@ -22,7 +20,6 @@ func (g *Game) Update() error {
 	for x, col := range *g.state {
 		for y, alive := range col {
 			if alive {
-				fmt.Println("FOUND ALIVE: ", x, y)
 				new_tiles = append(new_tiles, &Tile{x, y})
 			}
 		}

@@ -1,7 +1,5 @@
 package gameoflife
 
-import "fmt"
-
 type State [][]bool
 
 var ConwaysGameOfLife = RuleSet{
@@ -78,13 +76,11 @@ func (state *State) PerformGeneration(rules RuleSet) {
 				if num_active_neighbours >= rules.LiveSurvives.LowerBound && num_active_neighbours <= rules.LiveSurvives.UpperBound {
 					new_state[x][y] = true // survives
 				} else {
-					fmt.Println("Died:", x, y)
 					new_state[x][y] = false // dies (over or under population)
 				}
 			} else {
 				// dead
 				if num_active_neighbours == rules.DeadToLife.NumLiveNeighbours {
-					fmt.Println("To Life:", x, y)
 					new_state[x][y] = true // brought to life (reproduction)
 				} else {
 					new_state[x][y] = false
